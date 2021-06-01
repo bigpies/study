@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+//    大约2%为特等奖，大约5%一等奖，大约10%二等奖，大约30%三等奖，大约53%四等奖
+    var data=[
+        {prob:2,name:"特等奖"},
+        {prob:5,name:"一等奖"},
+        {prob:10,name:"二等奖"},
+        {prob:30,name:"三等奖"},
+        {prob:53,name:"四等奖"}
+    ];
+    Array.prototype.byProbGetName=function (){
+        var num=Math.random()*10000;
+        var sum=0;
+        for(var i=0;i<this.length;i++){
+            sum+=(this[i].prob*100)
+            if(sum>num){
+                return this[i].name
+            }
+        }
+    }
+
+
+
+//    测试概率是否正确
+    var sss=[];
+    for(var i=0;i<1000;i++){
+         sss.push(data.byProbGetName())
+    }
+    var test=[]
+    for(var i=0;i<sss.length;i++){
+        if(sss[i]=="特等奖"){
+            test.push(sss[i])
+        }
+    }
+    console.log(sss)
+    console.log(test)
+</script>
+</body>
+</html>
