@@ -659,3 +659,11 @@ function run(gen){
   }
   next()
 }
+
+
+function myNew(...args){
+  const [f, ...restargs] = args;
+  const obj = Object.create(f.prototype)
+  const res = f.apply(obj, restargs)
+  return res instanceof Object ? res : obj
+}

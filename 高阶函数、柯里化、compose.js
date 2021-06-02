@@ -1,3 +1,6 @@
+// 什么是高阶函数
+//   一个函数如果他的参数或者返回是一个函数，那么他就是高阶函数
+
 function curry(func) {
   return function curried(...args) {
     if (args.length >= func.length) {
@@ -10,25 +13,19 @@ function curry(func) {
   };
 }
 
-// 变种，这个有些不一样
-// 写一个函数 sum，它有这样的功能：
-sum(1)(2) == 3; // 1 + 2
-sum(1)(2)(3) == 6; // 1 + 2 + 3
-sum(5)(-1)(2) == 6
-sum(6)(-1)(-2)(-3) == 0
-sum(0)(1)(2)(3)(4)(5) == 15
-
-function sum(a){
-  let acc = a
-  function f(b){
-    acc += b
-    return f
+const currying = (fn,type = []) => {
+  const len = fn.length
+  return (...args) => {
+    const params = [...type, ...args]
+    console.log('args: ', args);
+    if(params.length < len){
+      return currying(fn, params)
+    }else{
+      return fn(...params)
+    }
   }
-  f.toString = function(){
-    return acc
-  }
-  return f
 }
+
 
 /*
   compose
